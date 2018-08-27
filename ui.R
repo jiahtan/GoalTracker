@@ -9,6 +9,7 @@ ui <- navbarPage("Goal Tracker",
                               dateInput('date',label = 'Date',value = Sys.Date()),
                               timeInput("timeWakeup", "Wake up time:",seconds = FALSE, value = strptime("07:00:00", "%T") ),
                               timeInput('timeSleep','Sleep time', seconds = FALSE, value = strptime("23:00:00", "%T")),
+                              selectInput('dayOfWeek','Day of the week', choices = c('Monday','Tuesday','Wednesday','Thursday','Friday','Saturday', 'Sunday')),
                               timeInput('timeWork', 'Work time', second = FALSE, value = strptime("09:00:00", "%T")),
                               radioButtons("read", "Read book?",
                                            choices = list("Yes", "No"),selected = 'Yes'),
@@ -25,6 +26,9 @@ ui <- navbarPage("Goal Tracker",
                             ),
                             
                             mainPanel(
+                              tabsetPanel(
+                                tabPanel("Reading Progress", htmlOutput('readProgressText'))
+                              )
                             )
                           )
                  ),
